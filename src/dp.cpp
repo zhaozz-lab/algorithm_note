@@ -67,7 +67,9 @@ void BFS(int x, int y)
 
             int newX = top.x + X[i];
             int newY = top.y + Y[i];
+            //cout << "newX" << newX << newY << endl;
             if (judge(newX, newY)) {
+                //cout << "newX" << newX << newY << endl;
                 Node.x = newX;
                 Node.y = newY;
                 Q.push(Node);
@@ -81,15 +83,26 @@ void BFS(int x, int y)
 
 int main()
 {
+    //scanf("%d%d", &n, &m);
+    
+    
+    
+    //cout<<matrix[0][0]<<endl;
     int ans = 0;
     for (int x = 0; x < n; x++)
         for (int y = 0; y < m; y++)
         {
+         /*   if (matrix[x][y] == 1)
+            {
+                std::cout << matrix[x][y]<< " ";
+            }*/
             if (matrix[x][y] == 1 && inq[x][y] == false) {
                 ans++;
                 BFS(x, y);
             }
         }
+   /* DFS(0, 0, 0);
+    printf("%d\n", maxValue);*/
     printf("%d\n", ans);
     return 1;
 }
