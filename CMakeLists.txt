@@ -15,3 +15,5 @@ add_executable(stack ${CMAKE_SOURCE_DIR}/src/stack.cpp)
 add_executable(dfs ${CMAKE_SOURCE_DIR}/src/dfs.cpp)
 add_executable(bfs ${CMAKE_SOURCE_DIR}/src/bfs.cpp)
 add_executable(dp ${CMAKE_SOURCE_DIR}/src/dp.cpp)
+
+add_executable(trees ${CMAKE_SOURCE_DIR}/src/trees.cpp)
