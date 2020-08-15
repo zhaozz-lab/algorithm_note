@@ -5,104 +5,112 @@
 #include <stack>
 #include <queue>
 #include <map>
+#include <algorithm>
 using namespace std;
-
-
-//给出一个m x n的矩阵，矩阵中的元素为0或1，称位置(x,y)与其上下左右四个位置(x,y-1),(x,y+1),(x+1,y),(x-1,y)。
-//如果矩阵中若干个1是相邻的，那么称这些1构成了一个块,求给定的矩阵中块的个数
- /*0 1 1 1 0 0 1
- 0 0 1 0 0 0 0 
- 0 0 0 0 1 0 0
- 0 0 0 1 1 1 0
- 1 1 1 0 1 0 0
- 1 1 1 1 0 0 0*/ 
-//如上图所示，块的个数为4
-using namespace std;
-
-const int maxn = 100;
-struct node
+int F(int n)
 {
-    int x, y;
-
-} Node;
-
-//int n, m;
-int m = 6;
-int n = 7;
-int matrix[6][7] = { {0, 1, 1, 1, 0, 0, 1},
-                         {0, 0 ,1, 0, 0, 0, 0},
-                         {0, 0, 0, 0, 1, 0, 0},
-                         {0, 0, 0, 1, 1, 1, 0},
-                         {1, 1, 1, 0, 1, 0, 0},
-                         {1, 1, 1, 1, 0, 0, 0}
-};
-//int matrix[maxn][maxn];
-bool inq[maxn][maxn] = { false };//记录位置(x,y)是否已如果队
-int X[4] = { 0,0,1,-1 };
-int Y[4] = { -1,1,0,0 };
-bool judge(int x, int y) {
-    //越界返回false
-    if (x >= n || x < 0 || y >= m || y < 0)
-        return false;
-    if (matrix[x][y] == 0 || inq[x][y] == true)
-        return false;
-    return true;
+    if (n == 0 || n == 1)
+        return 1;
+    return F(n - 1) + F(n - 2);
 }
 
-//BFS 函数访问位置(x,y)所在的块，将块中所有“1”的inq都设置为true
 
-void BFS(int x, int y)
+int dp[100] = {-1};
+int Fdynamic(int n)
 {
-    queue<node> Q;//定义队列
-    Node.x = x;
-    Node.y = y;
-    Q.push(Node);
-    inq[x][y] = true;
-    while (!Q.empty())
+    if (n == 0 || n == 1)
+        return 1;
+    if (dp[n] != -1)
+        return dp[n];
+    else
     {
-        node top = Q.front();//取出队首元素
-        Q.pop(); //队首元素出队
-        //cout << top.x << top.y << endl;
-        for (int i = 0; i < 4; i++){//循环4次，得到4个相邻位置
-
-            int newX = top.x + X[i];
-            int newY = top.y + Y[i];
-            //cout << "newX" << newX << newY << endl;
-            if (judge(newX, newY)) {
-                //cout << "newX" << newX << newY << endl;
-                Node.x = newX;
-                Node.y = newY;
-                Q.push(Node);
-                inq[newX][newY] = true;
-            }
-
-        }
+        dp[n] = Fdynamic(n - 1) + Fdynamic(n - 2);
+        return dp[n];
     }
- 
+}
+
+
+// 最大连续子序列和
+void maximumContinuousSubsequenceSum()
+{
+    int subsequence[6] = { -2,11,-4,13,-5,-2 };
+    int dp[6] = { 0,0,0,0,0,0 };
+    dp[0] = subsequence[0];
+    for(int i=1; i<6; i++)
+    { 
+        dp[i] = max((dp[i - 1] + subsequence[i]), subsequence[i]);
+        cout << "the" << dp[i];
+    }
+}
+
+
+void longestIncreasingSeuence()
+{
+    int subsequence[10] = {1, 2, 3, -5, -4, 1, 2, 13, -5, -2 };
+    int dp[10] = { 0,0,0,0,0,0,0,0,0,0 };
+    dp[0] = 1;
+    for (int i = 1; i < 10; i++)
+    {
+        if (subsequence[i] >= subsequence[i - 1])
+            dp[i] = dp[i-1] + 1;
+        else
+        {
+            dp[i] = 1;
+        }
+        //dp[i] = max((dp[i - 1] + subsequence[i]), subsequence[i]);
+        cout<<"longgest increasing sequence "<< dp[i]<<endl;
+    }
+}
+
+
+void LongestCommonSubsequence()
+{
+    const int N = 100;
+    //char A[N], B[N];
+    int dp[N][N];
+    char A[N] = { 'a','b','c','d','a','b','e','f','g' };
+    char B[N] = { 'a','b','e','f','g','c','h','t','s' };
+
+    int lenA = strlen(A + 1);
+    int lenB = strlen(B + 1);
+    
+    for (int i = 0; i < lenA; i++)
+        dp[i][0] = 0;
+
+    for (int j = 0; j < lenB; j++)
+        dp[0][j] = 0;
+    
+    for(int i = 1;i<lenA+1;i++)
+        for (int j = 1; j < lenB+1; j++)
+        {
+            if (A[i]==B[j])
+            {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            }
+            else
+            {
+                dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
+            }
+        }
+    cout << "the lenA and lenB is " << lenA << "lenB: " << lenB << endl;
+    cout << "the longest subsequence is " << dp[8][8] << endl;
+
 }
 
 int main()
 {
-    //scanf("%d%d", &n, &m);
-    
-    
-    
-    //cout<<matrix[0][0]<<endl;
-    int ans = 0;
-    for (int x = 0; x < n; x++)
-        for (int y = 0; y < m; y++)
-        {
-         /*   if (matrix[x][y] == 1)
-            {
-                std::cout << matrix[x][y]<< " ";
-            }*/
-            if (matrix[x][y] == 1 && inq[x][y] == false) {
-                ans++;
-                BFS(x, y);
-            }
-        }
-   /* DFS(0, 0, 0);
-    printf("%d\n", maxValue);*/
-    printf("%d\n", ans);
+    cout << F(5) << endl;
+
+    for (int i = 0; i < 100; i++)
+        dp[i] = -1;
+    cout << Fdynamic(5) << endl;
+    //最大连续子序列和
+    maximumContinuousSubsequenceSum();
+
+    //最长不下降子序列
+    longestIncreasingSeuence();
+
+    //最长公共子序列
+    LongestCommonSubsequence();
     return 1;
 }
