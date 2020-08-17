@@ -17,3 +17,5 @@ add_executable(bfs ${CMAKE_SOURCE_DIR}/src/bfs.cpp)
 add_executable(dp ${CMAKE_SOURCE_DIR}/src/dp.cpp)
 
 add_executable(trees ${CMAKE_SOURCE_DIR}/src/trees.cpp)
+add_executable(reconstructTree ${CMAKE_SOURCE_DIR}/src/reconstructtree.cpp)
+add_executable(graph ${CMAKE_SOURCE_DIR}/src/graph.cpp)
