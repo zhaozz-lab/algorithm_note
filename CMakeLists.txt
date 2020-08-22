@@ -19,6 +19,8 @@ add_executable(dp ${CMAKE_SOURCE_DIR}/src/dp.cpp)
 add_executable(trees ${CMAKE_SOURCE_DIR}/src/trees.cpp)
 add_executable(reconstructTree ${CMAKE_SOURCE_DIR}/src/reconstructtree.cpp)
 add_executable(graph ${CMAKE_SOURCE_DIR}/src/graph.cpp)
+add_executable(graph_dfs ${CMAKE_SOURCE_DIR}/src/graph_dfs.cpp)
+add_executable(graph_bfs ${CMAKE_SOURCE_DIR}/src/graph_bfs.cpp)
 
 add_executable(multithread_helloworld ${CMAKE_SOURCE_DIR}/src/parallel/multi_hello.cpp)
 add_executable(return_value ${CMAKE_SOURCE_DIR}/src/parallel/returnvalue.cpp)
