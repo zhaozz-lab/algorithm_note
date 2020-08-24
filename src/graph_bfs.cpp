@@ -1,104 +1,105 @@
-﻿// ConsoleApplication1.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
+﻿// graph depth first travese
+
 
 #include <iostream>
 #include <vector>
 #include <map>
+#include <queue>
 using namespace std;
+const int N = 5;
 
-const int maxn = 2010;
-const int INF = 1000000;
 
-map<int, string> intToString; //编号->姓名
-map<string, int> stringToInt;//姓名->编号
-map<string, int> Gang;//head->人数
-
-int G[maxn][maxn] = { 0 }, weight[maxn] = { 0 };
-int n, k, numPerson = 0; //边数n，下限k，总人数numPerson
-bool vis[maxn] = { false };
-
-//DFS 函数访问单个连通块，nowVisit为当前访问的编号
-//head 为头目，numMember为成员编号，totalValue为联通块的总边权
-void DFS(int nowVisit, int& head, int& numMember, int& totalValue)
+struct Node
 {
-    numMember++;//成员人数加1
-    vis[nowVisit] = true;
-    if (weight[nowVisit] >weight[head])
-    {
-        head = nowVisit; //当前访问节点的点权大于头目的点权，则更新头目
-    }
+    int v;//边的终点编号
+    int w;//边的权重
+    Node(int _v, int _w) :v(_v), w(_w) {}
+};
 
-    for (int i = 0; i < numPerson; i++)
-    {
-        if (G[nowVisit][i] > 0) {
-            totalValue += G[nowVisit][i];
-            G[nowVisit][i] = G[i][nowVisit] = 0;
-            if (vis[i]==false)
-            {
-                DFS(i, head, numMember, totalValue);
-            }
-        }
-    }
 
-}
+vector<Node> Adj[N];
+bool vis[N] = { false };
 
-//DFSTrave 函数遍历整个图，获取每个联通块的信息
-void DFSTrave() {
-    for (int i = 0; i < numPerson; i++)
+//0----1-----2
+//|    |     |
+//|----4-----3
+
+
+//assume the graph is 
+//  0 1 2 3 4 
+//0 0 2 0 0 1 
+//1 2 0 2 0 2
+//2 0 2 0 1 0
+//3 0 0 1 0 1
+//4 1 2 0 1 0
+
+void bfs(int u) {
+    vis[u] = true;
+    queue<int> q;
+    q.push(u);
+    while(!q.empty())
     {
-        if (vis[i] == false)
+        int index = q.front();
+        q.pop();
+        for (int i = 0; i < Adj[index].size(); i++)
         {
-            int head = i, numMember = 0, totalValue = 0;
-            DFS(i, head, numMember, totalValue);
-            if (numMember > 2 && totalValue > k) {
-                Gang[intToString[head]] = numMember;
+            Node v = Adj[index][i];
+            
+            if (vis[v.v] == false)
+            {
+                cout << v.v << "  " << v.w << endl;
+                q.push(v.v);
+                vis[v.v] = true;
             }
         }
+
     }
+    /*for (int i = 0; i < Adj[u].size(); i++)
+    {
+        Node v = Adj[u][i];
+        
+        if (vis[v.v] == false)
+        {
+            cout << v.v << "  " << v.w <<"depth is "<<depth<< endl;
+            bfs(v.v, depth + 1);
+        }
+    }*/
 }
 
-
-int change(string str)
+void BFSTrave() 
 {
-    if (stringToInt.find(str) != stringToInt.end()) { //如果str已经出现过，返回编号
-        return stringToInt[str];
-    }
-    else
+    for (int u = 0; u < N; u++)
     {
-        stringToInt[str] = numPerson;
-        intToString[numPerson] = str;
-        return numPerson++;
+        if (vis[u] == false)
+        {
+            bfs(u);
+        }
     }
+   
 }
 
 int main()
 {
-    int w;
-    string str1, str2;
-    //cin >> n >> k;
+   
+    Adj[0].push_back(Node(1, 1));
+    Adj[0].push_back(Node(4, 1));
+    
+    Adj[1].push_back(Node(0, 2));
+    Adj[1].push_back(Node(2, 2));
+    Adj[1].push_back(Node(4, 2));
+    
+    Adj[2].push_back(Node(1, 2));
+    Adj[2].push_back(Node(3, 1));
+    
+    Adj[3].push_back(Node(2, 1));
+    Adj[3].push_back(Node(4, 1));
+    
+    Adj[4].push_back(Node(0, 1));
+    Adj[4].push_back(Node(1, 2));
+    Adj[4].push_back(Node(3, 1));
+   
+    
+    BFSTrave();
 
-    n = 8;
-    k = 59;
-
-    for(int i=0;i<n;i++)
-    {
-        cin >> str1 >> str2 >> w; //输入边的两个端点和点权
-        int id1 = change(str1);
-        int id2 = change(str2);
-        weight[id1] += w;
-        weight[id2] += w;
-        G[id1][id2] += w;
-        G[id2][id1] += w;
-
-    }
-    DFSTrave();
-    cout << Gang.size() << endl;
-
-    map<string, int>::iterator it;
-
-    for (it = Gang.begin();it!=Gang.end();it++)
-    {
-        cout << it->first << " " << it->second << endl;
-    }
     return 0;
 }
