@@ -19,7 +19,9 @@ struct Node
 vector<Node> Adj[N];
 bool vis[N] = { false };
 
-
+//0----1-----2
+//|    |     |
+//|----4-----3
 
 
 //assume the graph is 
@@ -38,7 +40,7 @@ void dfs(int u, int depth) {
         
         if (vis[v.v] == false)
         {
-            cout << v.v << "  " << v.w << endl;
+            cout << v.v << "  " << v.w <<"depth is "<<depth<< endl;
             dfs(v.v, depth + 1);
         }
     }
@@ -58,7 +60,7 @@ void DFSTrave()
 int main()
 {
    
-    Adj[0].push_back(Node(3, 1));
+    Adj[0].push_back(Node(1, 1));
     Adj[0].push_back(Node(4, 1));
     
     Adj[1].push_back(Node(0, 2));
