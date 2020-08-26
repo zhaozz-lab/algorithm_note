@@ -64,7 +64,7 @@ node* create(int data[], int n)
 
 node* findMax(node* root)
 {
-	while (root != NULL)
+	while (root->rchild != NULL)
 	{
 		root = root->rchild;
 
@@ -75,7 +75,7 @@ node* findMax(node* root)
 
 node* findMin(node* root)
 {
-	while (root != NULL)
+	while (root->lchild != NULL)
 	{
 		root = root->lchild;
 
@@ -91,19 +91,20 @@ void deleteNode(node*& root, int x)
 	if (root->data == x) {
 		if (root->lchild == NULL && root->rchild == NULL)
 			root == NULL;
-	}
-	else if (root->lchild != NULL)
-	{
-		node* pre = findMax(root->lchild);
-		root->data = pre->data;
-		deleteNode(root->lchild, root->data);
 
-	}
-	else
-	{
-		node* next = findMin(root->rchild);
-		root->data = next->data;
-		deleteNode(root->rchild, root->data);
+		else if (root->lchild != NULL)
+		{
+			node* pre = findMax(root->lchild);
+			root->data = pre->data;
+			deleteNode(root->lchild, pre->data);
+
+		}
+		else
+		{
+			node* next = findMin(root->rchild);
+			root->data = next->data;
+			deleteNode(root->rchild, next->data);
+		}
 	}
 
 	if (root->data > x) {
@@ -124,22 +125,16 @@ int main()
 	search(root, 10);
 	search(root, 6);
 	node* minnode = findMin(root);
-	printf("the min value is %d", minnode->data);
+	printf("the min value is %d \n", minnode->data);
 
 	node* maxnode = findMax(root);
-	printf("the min value is %d", maxnode->data);
+	printf("the min value is %d \n", maxnode->data);
 
 	search(root, 3);
 	deleteNode(root, 3);
 
-	printf("after delete");
+	printf("after delete \n");
 	search(root, 3);
-
-	
-
-
-
-
 
 	return 0;
 }
