@@ -20,6 +20,9 @@ add_executable(9_1trees ${CMAKE_SOURCE_DIR}/src/trees.cpp)
 add_executable(9_2reconstructTree ${CMAKE_SOURCE_DIR}/src/reconstructtree.cpp)
 add_executable(9_3trees_traverse ${CMAKE_SOURCE_DIR}/src/tree_traverse.cpp)
 add_executable(9_4binary_search ${CMAKE_SOURCE_DIR}/src/binary_search.cpp)
+add_executable(9_5avltree ${CMAKE_SOURCE_DIR}/src/avltree.cpp)
+
+
 
 
 add_executable(graph ${CMAKE_SOURCE_DIR}/src/graph.cpp)
