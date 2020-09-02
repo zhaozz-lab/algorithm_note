@@ -209,5 +209,11 @@ int main()
 
 	cout << "the layer order is " << endl;
 	LayerOrder(root);
+
+
+	std::string path = "1.bmp";
+	path = path.replace(path.find(".bmp"), 1, "_det.bmp");
+	cout << path << endl;
+
 	return 1;
 }
