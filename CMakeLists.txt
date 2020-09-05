@@ -23,7 +23,7 @@ add_executable(9_4binary_search ${CMAKE_SOURCE_DIR}/src/binary_search.cpp)
 add_executable(9_5avltree ${CMAKE_SOURCE_DIR}/src/avltree.cpp)
 add_executable(9_6_set ${CMAKE_SOURCE_DIR}/src/set.cpp)
 add_executable(9_7_heap ${CMAKE_SOURCE_DIR}/src/heap.cpp)
-
+add_executable(9_8_huffman ${CMAKE_SOURCE_DIR}/src/huffman.cpp)
 
 
 
