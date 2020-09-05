@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -43,8 +44,16 @@ void init(int n) {
 		isRoot[i] = false;
 	}
 }
+
 int main()
 {
+	std::ofstream t("face.txt", std::ios::binary);
+	if (!t)
+	{
+		cout << "Cannot open engine file: " << "face.trt" << std::endl;
+		return false;
+	}
+	t << 1 << endl;
 	int n, m, a, b;
 	scanf("%d%d", &n, &m);
 	
