@@ -14,6 +14,7 @@ add_executable(vector_remove ${CMAKE_SOURCE_DIR}/src/vector_remove.cpp)
 add_executable(stack ${CMAKE_SOURCE_DIR}/src/stack.cpp)
 add_executable(7_dfs ${CMAKE_SOURCE_DIR}/src/dfs.cpp)
 add_executable(7_bfs ${CMAKE_SOURCE_DIR}/src/bfs.cpp)
+add_executable(4_3_recursion_permutation ${CMAKE_SOURCE_DIR}/src/permutation.cpp)
 add_executable(dp ${CMAKE_SOURCE_DIR}/src/dp.cpp)
 
 add_executable(9_1trees ${CMAKE_SOURCE_DIR}/src/trees.cpp)
