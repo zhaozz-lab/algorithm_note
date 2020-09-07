@@ -75,7 +75,6 @@ int main()
 {
     int w;
     string str1, str2;
-    //cin >> n >> k;
 
     n = 8;
     k = 59;

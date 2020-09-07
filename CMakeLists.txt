@@ -27,12 +27,14 @@ add_executable(9_8_huffman ${CMAKE_SOURCE_DIR}/src/huffman.cpp)
 
 
 
-add_executable(graph ${CMAKE_SOURCE_DIR}/src/graph.cpp)
-add_executable(graph_dfs ${CMAKE_SOURCE_DIR}/src/graph_dfs.cpp)
-add_executable(graph_bfs ${CMAKE_SOURCE_DIR}/src/graph_bfs.cpp)
+add_executable(10_3forwardsonWeibo ${CMAKE_SOURCE_DIR}/src/graph.cpp)
+add_executable(10_3_1graph_dfs_adjacent_list ${CMAKE_SOURCE_DIR}/src/graph_dfs_adjacent_list.cpp)
+add_executable(10_3_1graph_dfs_adjacent_matrix ${CMAKE_SOURCE_DIR}/src/graph_dfs_adjacent_matrix.cpp)
 
+add_executable(10_3_2graph_bfs_adjacent_list ${CMAKE_SOURCE_DIR}/src/graph_bfs_adjacent_list.cpp)
+add_executable(10_3_2graph_bfs_adjacent_matrix ${CMAKE_SOURCE_DIR}/src/graph_bfs_adjacent_matrix.cpp)
 
-
+add_executable(10_4_1_1graph_Dijkstra ${CMAKE_SOURCE_DIR}/src/graph_Dijkstra.cpp)
 
 
 

@@ -1,6 +1,4 @@
 ﻿// graph depth first travese
-
-
 #include <iostream>
 #include <vector>
 #include <map>
@@ -31,6 +29,9 @@ bool vis[N] = { false };
 //2 0 2 0 1 0
 //3 0 0 1 0 1
 //4 1 2 0 1 0
+
+
+
 
 void dfs(int u, int depth) {
     vis[u] = true;
