@@ -36,6 +36,8 @@ add_executable(10_3_2graph_bfs_adjacent_list ${CMAKE_SOURCE_DIR}/src/graph_bfs_a
 add_executable(10_3_2graph_bfs_adjacent_matrix ${CMAKE_SOURCE_DIR}/src/graph_bfs_adjacent_matrix.cpp)
 
 add_executable(10_4_1_1graph_Dijkstra ${CMAKE_SOURCE_DIR}/src/graph_Dijkstra.cpp)
+add_executable(10_4_2_1Bellman-Ford ${CMAKE_SOURCE_DIR}/src/graph_Bellman_Ford.cpp)
+add_executable(10_4_3_1Floyd ${CMAKE_SOURCE_DIR}/src/graph_Floyd.cpp)
 
 
 
