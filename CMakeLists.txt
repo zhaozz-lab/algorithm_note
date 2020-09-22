@@ -44,3 +44,7 @@ add_executable(10_4_3_1Floyd ${CMAKE_SOURCE_DIR}/src/graph_Floyd.cpp)
 
 add_executable(multithread_helloworld ${CMAKE_SOURCE_DIR}/src/parallel/multi_hello.cpp)
 add_executable(return_value ${CMAKE_SOURCE_DIR}/src/parallel/returnvalue.cpp)
+include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pthreads/include)
+link_directories(${CMAKE_SOURCE_DIR}/3rdparty/pthreads/lib)
+add_executable(multithread_pthread ${CMAKE_SOURCE_DIR}/src/helloworld.cpp)
+target_link_libraries(multithread_pthread pthreadVC2)
