@@ -48,3 +48,12 @@ include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pthreads/include)
 link_directories(${CMAKE_SOURCE_DIR}/3rdparty/pthreads/lib)
 add_executable(multithread_pthread ${CMAKE_SOURCE_DIR}/src/helloworld.cpp)
 target_link_libraries(multithread_pthread pthreadVC2)
+
+
+add_executable(multithread_parameter ${CMAKE_SOURCE_DIR}/src/parallel/multi_parameter.cpp)
+
+add_executable(sharedata1 ${CMAKE_SOURCE_DIR}/src/parallel/sharedata1.cpp)
+target_link_libraries(sharedata1 pthreadVC2)
+
+add_executable(concurrent_base_lock ${CMAKE_SOURCE_DIR}/src/parallel/concurrent_base_lock.cpp)
+target_link_libraries(concurrent_base_lock pthreadVC2)
