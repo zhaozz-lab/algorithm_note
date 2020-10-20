@@ -60,3 +60,7 @@ target_link_libraries(concurrent_base_lock pthreadVC2)
 
 add_executable(lazycounter_lock ${CMAKE_SOURCE_DIR}/src/parallel/lazycounter_lock.cpp)
 target_link_libraries(lazycounter_lock pthreadVC2)
+
+
+add_executable(condition_variable ${CMAKE_SOURCE_DIR}/src/parallel/condition_variable.cpp)
+target_link_libraries(condition_variable pthreadVC2)
