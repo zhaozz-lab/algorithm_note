@@ -67,6 +67,83 @@
 //	return 0;
 //}
 
+//#define MAX 16
+//int buffer[MAX];
+//int fills = 0;
+//int use = 0;
+//int count = 0;
+//
+//void put(int value) {
+//	buffer[fills] = value;
+//	fills = (fills + 1) % MAX;
+//	count++;
+//}
+//
+//int get() {
+//	int tmp = buffer[use];
+//	use = (use + 1) % MAX;
+//	count--;
+//	return tmp;
+//
+//}
+//
+//pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+//pthread_cond_t empty = PTHREAD_COND_INITIALIZER;
+//pthread_cond_t fill = PTHREAD_COND_INITIALIZER;
+//int loops = 1e8;
+//
+//void *producer(void* arg) {
+//	int i;
+//	for (i = 0; i < loops; i++) {
+//		Pthread_mutex_lock(&mutex);
+//		while (count == MAX)
+//		{
+//			Pthread_cond_wait(&empty, &mutex);
+//		}
+//		put(i);
+//		Pthread_cond_signal(&fill);
+//		Pthread_mutex_unlock(&mutex);
+//	}
+//	return NULL;
+//}
+//
+//void *consumer(void* args) {
+//	int i;
+//	for (i = 0; i < loops; i++) {
+//		Pthread_mutex_lock(&mutex);
+//		while (count == 0)
+//		{
+//			Pthread_cond_wait(&fill, &mutex);
+//		}
+//		int temp = get();
+//		Pthread_cond_signal(&empty);
+//		Pthread_mutex_unlock(&mutex);
+//		printf("consume %d \n", temp);
+//	}
+//	return NULL;
+//}
+//
+//int main(int argc, char* argv[]) {
+//	printf("parent: begin \n");
+//	pthread_t produce[1], consume[1];
+//	
+//
+//	for (int i = 0; i < 1; i++) {
+//		Pthread_create(&produce[i], NULL, producer, NULL);
+//		Pthread_create(&consume[i], NULL, consumer, NULL);
+//	}
+//	for (int i = 0; i < 1; i++) {
+//		pthread_join(produce[i], NULL);
+//		pthread_join(consume[i], NULL);
+//		
+//	}
+//	
+//	printf("parent end \n");
+//	return 0;
+//}
+
+
+# include "semaphore.h"
 #define MAX 16
 int buffer[MAX];
 int fills = 0;
@@ -87,37 +164,48 @@ int get() {
 
 }
 
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t empty = PTHREAD_COND_INITIALIZER;
-pthread_cond_t fill = PTHREAD_COND_INITIALIZER;
+//pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+//pthread_cond_t empty = PTHREAD_COND_INITIALIZER；
+sem_t empty;
+sem_t full;
+sem_t mutex;
+
+
+
 int loops = 1e8;
 
-void *producer(void* arg) {
+void* producer(void* arg) {
 	int i;
 	for (i = 0; i < loops; i++) {
-		Pthread_mutex_lock(&mutex);
+		sem_wait(&empty);
+		sem_wait(&mutex);
+		
+		put(i);
+		sem_post(&mutex);
 		while (count == MAX)
 		{
-			Pthread_cond_wait(&empty, &mutex);
+			sem_post(&full);
 		}
-		put(i);
-		Pthread_cond_signal(&fill);
-		Pthread_mutex_unlock(&mutex);
+		
+		
+		
 	}
 	return NULL;
 }
 
-void *consumer(void* args) {
+void* consumer(void* args) {
 	int i;
 	for (i = 0; i < loops; i++) {
-		Pthread_mutex_lock(&mutex);
-		while (count == 0)
-		{
-			Pthread_cond_wait(&fill, &mutex);
-		}
+
+		sem_wait(&full);
+		sem_wait(&mutex);
+		
 		int temp = get();
-		Pthread_cond_signal(&empty);
-		Pthread_mutex_unlock(&mutex);
+		sem_post(&mutex);
+		while (count==0)
+		{
+			sem_post(&empty);
+		}
 		printf("consume %d \n", temp);
 	}
 	return NULL;
@@ -126,7 +214,9 @@ void *consumer(void* args) {
 int main(int argc, char* argv[]) {
 	printf("parent: begin \n");
 	pthread_t produce[1], consume[1];
-	
+	sem_init(&empty, 0, 1);
+	sem_init(&full, 0, 1);
+	sem_init(&mutex, 0, 1);
 
 	for (int i = 0; i < 1; i++) {
 		Pthread_create(&produce[i], NULL, producer, NULL);
@@ -135,9 +225,9 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < 1; i++) {
 		pthread_join(produce[i], NULL);
 		pthread_join(consume[i], NULL);
-		
+
 	}
-	
+
 	printf("parent end \n");
 	return 0;
 }
