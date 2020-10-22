@@ -1,0 +1,63 @@
+cmake_minimum_required(VERSION 2.8)
+project(algorithm_note)
+SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
+add_definitions(-std=c++11)
+
+add_definitions(/Zi /Od)
+
+message(${PROJECT_SOURCE_DIR})
+add_executable(sort ${PROJECT_SOURCE_DIR}/sort.cpp)
+SET_PROPERTY(TARGET sort PROPERTY FOLDER "2")
+
+add_executable(vector_remove ${PROJECT_SOURCE_DIR}/vector_remove.cpp)
+SET_PROPERTY(TARGET vector_remove PROPERTY FOLDER "2")
+
+add_executable(stack ${PROJECT_SOURCE_DIR}/stack.cpp)
+SET_PROPERTY(TARGET stack PROPERTY FOLDER "2")
+
+add_executable(7_dfs ${PROJECT_SOURCE_DIR}/dfs.cpp)
+SET_PROPERTY(TARGET 7_dfs PROPERTY FOLDER "7")
+add_executable(7_bfs ${PROJECT_SOURCE_DIR}/bfs.cpp)
+SET_PROPERTY(TARGET 7_bfs PROPERTY FOLDER "7")
+add_executable(4_3_recursion_permutation ${PROJECT_SOURCE_DIR}/permutation.cpp)
+SET_PROPERTY(TARGET 4_3_recursion_permutation PROPERTY FOLDER "4")
+add_executable(dp ${PROJECT_SOURCE_DIR}/dp.cpp)
+SET_PROPERTY(TARGET dp PROPERTY FOLDER "11")
+
+add_executable(9_1trees ${PROJECT_SOURCE_DIR}/trees.cpp)
+SET_PROPERTY(TARGET 9_1trees PROPERTY FOLDER "9")
+add_executable(9_2reconstructTree ${PROJECT_SOURCE_DIR}/reconstructtree.cpp)
+SET_PROPERTY(TARGET 9_2reconstructTree PROPERTY FOLDER "9")
+add_executable(9_3trees_traverse ${PROJECT_SOURCE_DIR}/tree_traverse.cpp)
+SET_PROPERTY(TARGET 9_3trees_traverse PROPERTY FOLDER "9")
+add_executable(9_4binary_search ${PROJECT_SOURCE_DIR}/binary_search.cpp)
+SET_PROPERTY(TARGET 9_4binary_search PROPERTY FOLDER "9")
+add_executable(9_5avltree ${PROJECT_SOURCE_DIR}/avltree.cpp)
+SET_PROPERTY(TARGET 9_5avltree PROPERTY FOLDER "9")
+
+add_executable(9_6_set ${PROJECT_SOURCE_DIR}/set.cpp)
+SET_PROPERTY(TARGET 9_6_set PROPERTY FOLDER "9")
+add_executable(9_7_heap ${PROJECT_SOURCE_DIR}/heap.cpp)
+SET_PROPERTY(TARGET 9_7_heap PROPERTY FOLDER "9")
+add_executable(9_8_huffman ${PROJECT_SOURCE_DIR}/huffman.cpp)
+SET_PROPERTY(TARGET 9_8_huffman PROPERTY FOLDER "9")
+
+
+
+add_executable(10_3forwardsonWeibo ${PROJECT_SOURCE_DIR}/graph.cpp)
+SET_PROPERTY(TARGET 10_3forwardsonWeibo PROPERTY FOLDER "10")
+add_executable(10_3_1graph_dfs_adjacent_list ${PROJECT_SOURCE_DIR}/graph_dfs_adjacent_list.cpp)
+SET_PROPERTY(TARGET 10_3_1graph_dfs_adjacent_list PROPERTY FOLDER "10")
+add_executable(10_3_1graph_dfs_adjacent_matrix ${PROJECT_SOURCE_DIR}/graph_dfs_adjacent_matrix.cpp)
+SET_PROPERTY(TARGET 10_3_1graph_dfs_adjacent_matrix PROPERTY FOLDER "10")
+
+add_executable(10_3_2graph_bfs_adjacent_list ${PROJECT_SOURCE_DIR}/graph_bfs_adjacent_list.cpp)
+SET_PROPERTY(TARGET 10_3_2graph_bfs_adjacent_list PROPERTY FOLDER "10")
+add_executable(10_3_2graph_bfs_adjacent_matrix ${PROJECT_SOURCE_DIR}/graph_bfs_adjacent_matrix.cpp)
+SET_PROPERTY(TARGET 10_3_2graph_bfs_adjacent_matrix PROPERTY FOLDER "10")
+add_executable(10_4_1_1graph_Dijkstra ${PROJECT_SOURCE_DIR}/graph_Dijkstra.cpp)
+SET_PROPERTY(TARGET 10_4_1_1graph_Dijkstra PROPERTY FOLDER "10")
+add_executable(10_4_2_1Bellman-Ford ${PROJECT_SOURCE_DIR}/graph_Bellman_Ford.cpp)
+SET_PROPERTY(TARGET 10_4_2_1Bellman-Ford PROPERTY FOLDER "10")
+add_executable(10_4_3_1Floyd ${PROJECT_SOURCE_DIR}/graph_Floyd.cpp)
+SET_PROPERTY(TARGET 10_4_3_1Floyd PROPERTY FOLDER "10")
