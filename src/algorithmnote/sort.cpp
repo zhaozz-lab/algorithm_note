@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 void quicksort(vector<int>& nums, int l, int r) {
@@ -187,6 +188,39 @@ void testfindKthlargest() {
 }
 
 
+vector<int> topKFrequent(vector<int>& nums, int k) {
+	unordered_map<int, int> counts;
+	int max_count = 0;
+	for (const int& num : nums) {
+		max_count = max(max_count, ++counts[num]);
+	}
+
+	vector<vector<int>> buckets(max_count + 1);
+	for (const auto& p : counts) {
+		buckets[p.second].push_back(p.first);
+	}
+
+	vector<int> ans;
+	for (int i = max_count; i >= 0 && ans.size() < k; --i) {
+		for (const int& num : buckets[i]) {
+			ans.push_back(num);
+			if(ans.size()==k)
+				break;
+		}
+	}
+	return ans;
+}
+
+
+void testtopKFrequent() {
+	vector<int> nums({ 1,1,1,1,2,2,3,4 });
+	vector<int> results = topKFrequent(nums, 2);
+	for (auto result : results)
+		cout << result << endl;
+}
+
+
+
 int main()
 {
 	testquicksort();
@@ -195,5 +229,6 @@ int main()
 	testbubblesort();
 	testselectionsort();
 	testfindKthlargest();
+	testtopKFrequent();
     return 1;
 }
