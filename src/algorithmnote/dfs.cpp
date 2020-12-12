@@ -108,11 +108,41 @@ namespace recursionmethod {
     }
 }
 
-
-
-
-int main()
+class teststatic
 {
+public:
+    teststatic();
+    ~teststatic();
+    bool infer();
+private:
+
+};
+
+teststatic::teststatic()
+{
+}
+bool teststatic::infer() {
+    static int a = 1;
+    a += 1;
+    cout << "the a is " << a << endl;
+    return true;
+}
+teststatic::~teststatic()
+{
+}
+
+
+
+int main(int argc,char** argv)
+{
+    int test = std::atoi(argv[1]);
+   
+    teststatic *ptest1 = new teststatic();
+    teststatic* ptest2 = new teststatic();
+
+    ptest1->infer();
+    ptest2->infer();
+
 	/*  scanf("%d%d", &n, &V);
 	  for (int i = 0; i < n; i++) {
 		  scanf("%d", &w[i]);

@@ -29,7 +29,11 @@ void Pthread_create(pthread_t* tidp, pthread_attr_t* attrp,
         printf("Pthread_create error");
 }
 
-
+#include<thread>
+#include<iostream>
+void add(int a, int b, int& c, int threadid) {
+	c = a + b;
+}
 int main(int argc, char** argv)
 {
     pthread_t p1, p2;
@@ -41,5 +45,18 @@ int main(int argc, char** argv)
     pthread_join(p1, &status);
     pthread_join(p2, &status);
     printf("done with %d \n", counter);
+
+
+ 
+
+    static const int threads_nums = 10;
+	std::thread threads[threads_nums];
+	int c;
+	for (int i = 0; i < threads_nums; i++)
+		threads[i] = std::thread(add, i, i, c, i);
+	for (int i = 0; i < threads_nums; i++)
+		threads[i].join();
+
+
     
 }
