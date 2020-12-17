@@ -8,4 +8,6 @@ add_definitions(/Zi /Od)
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /Debug")
 
 add_subdirectory(src/algorithmnote)
-add_subdirectory(src/parallel)
+add_subdirectory(src/cplusplus)
+add_subdirectory(src/swordoffer)
+add_subdirectory(src/vsdebug)
