@@ -15,6 +15,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # #5.library目录及name名称
 # link_directories(${CMAKE_CURRENT_LIST_DIR}/build/Release
 #                  )
-
+option(BENCHMARK "test run time" ON)
+message("the BENCHMARK ",${BENCHMARK})
+if(BENCHMARK)
+   add_definitions(-DBENCHMARK)
+endif()
 #8.add link library，添加工程所依赖的库
 add_executable(sword ${PROJECT_SOURCE_DIR}/src/main.cpp)
