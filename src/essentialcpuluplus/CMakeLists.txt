@@ -21,7 +21,10 @@ if(BENCHMARK)
    add_definitions(-DBENCHMARK)
 endif()
 #8.add link library，添加工程所依赖的库
-include_directories(${PROJECT_SOURCE_DIR}/src)
+#include_directories(${PROJECT_SOURCE_DIR}/src)
 add_executable(Triangular_iterator ${PROJECT_SOURCE_DIR}/src/chapter4.cpp 
-${PROJECT_SOURCE_DIR}/src/Triangular_iterator.cpp 
-${PROJECT_SOURCE_DIR}/src/Triangular.cpp )
+#${PROJECT_SOURCE_DIR}/src/Triangular_iterator.cpp 
+#${PROJECT_SOURCE_DIR}/src/Triangular.cpp 
+)
+
+add_executable(multithread ${PROJECT_SOURCE_DIR}/src/main.cpp) 

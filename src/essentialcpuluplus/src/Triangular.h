@@ -2,6 +2,8 @@
 #include<chrono>
 #include<vector>
 #include<string>
+#include "Triangular_iterator.h"
+typedef Triangular_iterator iterator;
 using namespace std;
 
 class Triangular {
@@ -29,16 +31,16 @@ public:
 	static void gen_elems_to_value(int value);
 	static void display(int length, int beg_pos, ostream& os = cout);
 
-	typedef Triangular_iterator iterator;
+	
 
-	iterator begin() const
+	Triangular_iterator begin() const
 	{
-		return iterator(_beg_pos);
+		return Triangular_iterator(_beg_pos);
 	}
 
-	iterator end() const
+	Triangular_iterator end() const
 	{
-		return iterator(_beg_pos+length);
+		return Triangular_iterator(_beg_pos+length);
 	}
 
 	Triangular& copy(const Triangular& rhs);
@@ -47,6 +49,10 @@ private:
 	int _beg_pos;
 	mutable int _next;
 	//static data member
-	static  const int _max_elems = 1024;
+	//static  const int _max_elems = 1024;
+	enum
+	{
+		_max_elems = 1024
+	};
 	static vector<int> _elems;
 };
