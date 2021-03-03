@@ -22,3 +22,6 @@ if(BENCHMARK)
 endif()
 #8.add link library，添加工程所依赖的库
 add_executable(sword ${PROJECT_SOURCE_DIR}/src/main.cpp)
+add_executable(abstractfactory ${PROJECT_SOURCE_DIR}/src/abstractfactory.cpp)
+add_executable(factorymethod ${PROJECT_SOURCE_DIR}/src/factorymethod.cpp)
+add_executable(builder ${PROJECT_SOURCE_DIR}/src/builder.cpp)

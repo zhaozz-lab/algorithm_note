@@ -213,9 +213,136 @@ void testtriangular() {
 	std::cout <<" ==sum of elements" << sum(tri) << std::endl;
 }
 
+double myPow(double x, int n) {
+	if (x == 1 || n == 0)
+		return 1;
+	double ans = 1;
+	long num = n;
+	if (n < 0) {
+		num = -num;
+		x = 1 / x;
+	}
+
+	while (num)
+	{
+		cout << ans << endl;
+		if (num & 1) ans *= x;
+		x *= x;
+		num = num >> 1;
+	}
+	return ans;
+}
+
+vector<int> quicksort(vector<int>& arr, int k, int l, int r) {
+	int i = l, j = r;
+	while(i < j) {
+		while (i<j && arr[j]>=arr[l])
+		{
+			j--;
+		}
+		while (i < j && arr[i] <= arr[l])
+		{
+			i++;
+		}
+		swap(arr[i], arr[j]);	
+	}
+	swap(arr[i], arr[l]);
+	if (i > k) return quicksort(arr, k, l, i);
+	if (i < k) return quicksort(arr, k, i + 1, r);
+	vector<int> res;
+	res.assign(arr.begin(), arr.begin() + k);
+	return res;
+	
+}
+
+
+vector<int> getLeastNumbers(vector<int>& arr, int k) {	
+{
+		if (k >= arr.size())
+			return arr;
+		return quicksort(arr, k, 0, arr.size() - 1);
+	}
+}
+
+#include <unordered_map>
+char firstUniqChar(string s) {
+	unordered_map<char, bool> dic;
+	for (auto c : s)
+		dic[c] = dic.find(c) == dic.end();
+	for (auto c:s)
+	{
+		if (dic[c])
+			return c;
+	}
+	
+	return ' ';
+}
+
+int search(vector<int>& nums, int target) {
+	int low = 0, high = nums.size() - 1;
+	int index = 0, count = 0;
+	while (low < high) {
+		int mid = low + (high - low) / 2;
+		if (target < nums[mid])
+			low = mid;
+		else if (target > nums[mid])
+			high = mid;
+		else
+			index = low;
+	}
+	for(int i = index;i<high;++i)
+		if (target == nums[i])
+		{
+			count++;
+		}
+	return count;
+}
+
+
+class GlobalClass {
+	int m_value;
+	
+	GlobalClass(int v = 0) {
+		m_value = v;
+	}
+public:
+	int get_value() {
+		return m_value;
+	}
+
+	void set_value(int value) {
+		m_value = value;
+	}
+
+	static GlobalClass* get_instance() {
+		
+		static GlobalClass* s_instance = new GlobalClass();
+		return s_instance;
+
+	}
+};
+
+
 int main() {
-	test_pointer_algorithm();
-	testfilter();
-	testtriangular();
+	GlobalClass::get_instance()->set_value(1);
+	cout << GlobalClass::get_instance()->get_value();
+	//test_pointer_algorithm();
+	//testfilter();
+	//testtriangular();
+	//myPow(2.0, -2);
+	//vector<int> arr;
+	//arr.push_back(3);
+	//arr.push_back(2);
+	//arr.push_back(1);
+	//arr.push_back(1);
+	//int k = 2;
+	//vector<int> result;
+	//result = getLeastNumbers(arr, k);
+	string test = "abaccdef";
+	char result = firstUniqChar(test);
+
+	return 0;
+
+
 
 }
