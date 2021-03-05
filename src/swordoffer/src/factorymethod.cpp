@@ -3,125 +3,64 @@
 #include<vector>
 #include<string>
 using namespace std;
-//#define LINUX
-
-class Widget {
-public: 
-	virtual void draw() = 0;
+class Ball
+{
+public:
+	// Factory Method
+	static Ball* make_Ball(int choice);
+	virtual void play() = 0;
 };
 
-class LinuxButton:public Widget {
+class basketball : public Ball
+{
 public:
-	void draw()
+	void play()
 	{
-		cout << "Linux button" << endl;
+		cout << "play basketball \n";
 	}
 };
-
-class LinuxMenu :public Widget {
+class football : public Ball
+{
 public:
-	void draw()
+	void play()
 	{
-		cout << "Linux menu" << endl;
+		cout << "play football \n";
 	}
 };
-
-
-class WindowsButton :public Widget {
+class tableball : public Ball
+{
 public:
-	void draw()
+	void play()
 	{
-		cout << "Windows button" << endl;
+		cout << "play tableball \n";
 	}
 };
 
-class WindowsMenu :public Widget {
-public:
-	void draw()
-	{
-		cout << "Windows menu" << endl;
-	}
-};
-
-class Factory {
-public:
-	virtual Widget* create_button() = 0;
-	virtual Widget* create_menu() = 0;
-};
-
-class LinuxFactory : public Factory {
-public:
-	Widget* create_button() {
-		return new LinuxButton;
-	}
-	Widget* create_menu() {
-		return new LinuxMenu;
-	}
-};
-
-
-class WindowsFactory : public Factory {
-public:
-	Widget* create_button() {
-		return new WindowsButton;
-	}
-	Widget* create_menu() {
-		return new WindowsMenu;
-	}
-};
-
-
-class Client {
-private:
-	Factory* factory;
-
-public:
-	Client(Factory* f) {
-		factory = f;
-	}
-
-	void draw() {
-		Widget* w = factory->create_button();
-		w->draw();
-		display_window_one();
-		display_window_two();
-	}
-
-	void display_window_one() {
-		Widget* w[] = {
-			factory->create_button(),
-			factory->create_menu()
-		};
-		w[0]->draw();
-		w[1]->draw();
-	}
-
-	void display_window_two() {
-		Widget* w[] = {
-			factory->create_menu(),
-			factory->create_button()
-		};
-		w[0]->draw();
-		w[1]->draw();
-	}
-};
-
-
-
-int main() {
-	//myPow(2, 9);
-	Factory* factory;
-#ifdef LINUX
-	factory = new LinuxFactory;
-#else // WINDOWS
-	factory = new WindowsFactory;
-#endif
-
-	Client* c = new Client(factory);
-	c->draw();
-
-	return 0;
-
-
-
+Ball* Ball::make_Ball(int choice)
+{
+	if (choice == 1)
+		return new basketball;
+	else if (choice == 2)
+		return new football;
+	else
+		return new tableball;
 }
+
+int main()
+{
+	vector<Ball*> roles;
+	int choice;
+	while (true)
+	{
+		cout << "Larry(1) Moe(2) Curly(3) Go(0): ";
+		cin >> choice;
+		if (choice == 0)
+			break;
+		roles.push_back(Ball::make_Ball(choice));
+	}
+	for (int i = 0; i < roles.size(); i++)
+		roles[i]->make_Ball(i);
+	for (int i = 0; i < roles.size(); i++)
+		delete roles[i];
+}
+

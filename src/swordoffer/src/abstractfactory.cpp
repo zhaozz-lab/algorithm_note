@@ -4,7 +4,6 @@
 #include<string>
 using namespace std;
 //#define LINUX
-using namespace std;
 
 class Widget {
 public: 
